@@ -13,8 +13,7 @@
         r = c.map { |x|
           a = b = 0
           c[i..e].each { |r| r <= x ? a+=1 : break }
-          c[0..i].reverse.each { |r| r <= x ? b+=1 : break }
-          i+=1
+          (t=i+=1).times { c[t-=1] <= x ? b+=1 : break }
           [a,b]
         }
         a = r.inject([]) { |acc,x|
