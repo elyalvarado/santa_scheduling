@@ -1,4 +1,4 @@
-def santa_time e, h
+->e,h{
   h.split(/\+|\n/).map { |h|
     n, g = h.split('*').map(&:to_i)
     g ||= 0
@@ -31,4 +31,4 @@ def santa_time e, h
       c.max
     }.min
   }.sum
-end
+}
