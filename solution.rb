@@ -9,14 +9,17 @@
       c = [0] * e
       j.each { |q|
         w, y = q
-        r = c.map.with_index { |x,i|
+        i=j=0
+        r = c.map { |x|
           a = b = 0
           c[i..e].each { |r| r <= x ? a+=1 : break }
           c[0..i].reverse.each { |r| r <= x ? b+=1 : break }
+          i+=1
           [a,b]
         }
-        a = r.each.with_index.inject([]) { |acc,(x,i)|
-              acc<<i if x[0] >= w
+        a = r.inject([]) { |acc,x|
+              acc<<j if x[0] >= w
+              j+=1
               acc
             }
         d = a.min { |a,b| c[a] <=> c[b] }
