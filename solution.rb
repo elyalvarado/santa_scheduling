@@ -2,7 +2,6 @@
   h.split(/\+|\n/).map { |h|
     n, g = h.split('*').map(&:to_i)+[0,0]
     return -1 if (g > 0 && e < 2) ||(n > 0 && e < 3)
-    next 0 if e == 0
     ([[3,5]]*n + [[2,4]]*g).permutation.map { |j|
       c = [0] * e
       j.each { |q|
@@ -25,6 +24,6 @@
         (b..(b+w-1)).each { |x| c[x] = z }
       }
       c.max
-    }.min
+    }.min||0
   }.sum
 }
