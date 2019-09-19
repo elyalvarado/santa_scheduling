@@ -1,15 +1,11 @@
 def santa_time e, h
-  h = h.split /\+|\n/
-  h.map { |h|
+  h.split(/\+|\n/).map { |h|
     n, g = h.split('*').map(&:to_i)
     g ||= 0
     n ||= 0
     return -1 if (g > 0 && e < 2) ||(n > 0 && e < 3)
     next 0 if e == 0
-    v = [1]*n + [0]*g
-    o = v.permutation
-    f = o.map do |j|
-      j = j.map { |x| x==1 ? [3,5] : [2,4] }
+    ([[3,5]]*n + [[2,4]]*g).permutation.map do |j|
       c = [0] * e
       j.each do |q|
         w, y = q
@@ -33,7 +29,6 @@ def santa_time e, h
         (b..(b+w-1)).each { |x| c[x] = z }
       end
       c.max
-    end
-    f.min
+    end.min
   }.sum
 end
