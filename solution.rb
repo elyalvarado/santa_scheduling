@@ -10,21 +10,17 @@
       j.each { |q|
         w, y = q
         r = c.map.with_index { |x,i|
-          a = 0
+          a = b = 0
           c[i..e].each { |r| r <= x ? a+=1 : break }
-          a
-        }
-        l = c.map.with_index { |x,i|
-          a = 0
-          c[0..i].reverse.each { |r| r <= x ? a+=1 : break }
-          a
+          c[0..i].reverse.each { |r| r <= x ? b+=1 : break }
+          [a,b]
         }
         a = r.each.with_index.inject([]) { |acc,(x,i)|
-              acc<<i if x >= w
+              acc<<i if x[0] >= w
               acc
             }
         d = a.min { |a,b| c[a] <=> c[b] }
-        b = d - (l[d] - 1)
+        b = d - (r[d][1] - 1)
         z = c[d] + y
         (b..(b+w-1)).each { |x| c[x] = z }
       }
