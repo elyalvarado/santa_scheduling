@@ -19,7 +19,7 @@
               k
             }
         d = a.min { |a,b| c[a] <=> c[b] }
-        b = d - (r[d][1] - 1)
+        b = d - r[d][1] + 1
         z = c[d] + y
         (b..(b+w-1)).map { |x| c[x] = z }
       }
