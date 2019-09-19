@@ -5,20 +5,20 @@ def santa_time e, h
     n ||= 0
     return -1 if (g > 0 && e < 2) ||(n > 0 && e < 3)
     next 0 if e == 0
-    ([[3,5]]*n + [[2,4]]*g).permutation.map do |j|
+    ([[3,5]]*n + [[2,4]]*g).permutation.map { |j|
       c = [0] * e
-      j.each do |q|
+      j.each { |q|
         w, y = q
-        r = c.map.with_index do |x,i|
+        r = c.map.with_index { |x,i|
           a = 0
           c[i..e].each { |r| r <= x ? a+=1 : break }
           a
-        end
-        l = c.map.with_index do |x,i|
+        }
+        l = c.map.with_index { |x,i|
           a = 0
           c[0..i].reverse.each { |r| r <= x ? a+=1 : break }
           a
-        end
+        }
         a = r.each.with_index.inject([]) { |acc,(x,i)|
               acc<<i if x >= w
               acc
@@ -27,8 +27,8 @@ def santa_time e, h
         b = d - (l[d] - 1)
         z = c[d] + y
         (b..(b+w-1)).each { |x| c[x] = z }
-      end
+      }
       c.max
-    end.min
+    }.min
   }.sum
 end
