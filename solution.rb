@@ -23,26 +23,14 @@ def santa_time e, h
           c[0..i].reverse.each { |r| r <= x ? a+=1 : break }
           a
         end
-        a =
-            r.each.with_index.inject([]) { |acc,(x,i)|
+        a = r.each.with_index.inject([]) { |acc,(x,i)|
               acc<<i if x >= w
               acc
             }
-        d =
-            a.min { |a,b|
-              c[a] <=> c[b]
-            }
-        b =
-            d -
-                (l[
-                    d
-                ] - 1)
-        z = c[
-            d
-        ] + y
-        (b..(b+w-1)).each { |x|
-          c[x] = z
-        }
+        d = a.min { |a,b| c[a] <=> c[b] }
+        b = d - (l[d] - 1)
+        z = c[d] + y
+        (b..(b+w-1)).each { |x| c[x] = z }
       end
       c.max
     end
