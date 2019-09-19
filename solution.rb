@@ -21,7 +21,7 @@ def santa_time elves, serialized_houses
     all_jobs = [1]*naughty_people + [0]*good_people
 
     # Then try all possible permutations
-    all_possible_order_of_jobs = unique_permutations all_jobs
+    all_possible_order_of_jobs = all_jobs.permutation
     finish_times = all_possible_order_of_jobs.map do |job_list|
       # Pass to bin pack the actual dimensions of the job
       jobs = job_list.map { |x| x==1 ? [3,5] : [2,4] }
@@ -29,34 +29,6 @@ def santa_time elves, serialized_houses
     end
     finish_times.min
   }.sum # Get the total time for all the houses
-end
-
-# Adapted from https://github.com/agrberg/unique_permutation based off of algorithm L
-# by Donald Knuth
-def unique_permutations array
-  return_array = []
-  array_copy = array.sort
-  return_array << array_copy.dup
-  return return_array if array.size < 2
-
-  while true
-    j = array.size - 2;
-    j -= 1 while j > 0 && array_copy[j] >= array_copy[j+1]
-
-    if array_copy[j] < array_copy[j+1]
-      l = array.size - 1
-      l -= 1 while array_copy[j] >= array_copy[l]
-
-      array_copy[j] , array_copy[l] = array_copy[l] , array_copy[j]
-      array_copy[j+1..-1] = array_copy[j+1..-1].reverse
-
-      return_array << array_copy.dup
-
-    else
-      break
-    end
-  end
-  return return_array
 end
 
 def bin_pack_max_height elves, jobs
