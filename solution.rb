@@ -1,8 +1,6 @@
 ->e,h{
   h.split(/\+|\n/).map { |h|
-    n, g = h.split('*').map(&:to_i)
-    g ||= 0
-    n ||= 0
+    n, g = h.split('*').map(&:to_i)+[0,0]
     return -1 if (g > 0 && e < 2) ||(n > 0 && e < 3)
     next 0 if e == 0
     ([[3,5]]*n + [[2,4]]*g).permutation.map { |j|
@@ -16,10 +14,10 @@
           (t=i+=1).times { c[t-=1] <= x ? b+=1 : break }
           [a,b]
         }
-        a = r.inject([]) { |acc,x|
-              acc<<j if x[0] >= w
+        a = r.inject([]) { |k,x|
+              k<<j if x[0] >= w
               j+=1
-              acc
+              k
             }
         d = a.min { |a,b| c[a] <=> c[b] }
         b = d - (r[d][1] - 1)
